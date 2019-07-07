@@ -1,0 +1,14 @@
+<template name="contentPart">
+  <view class="content-part-container">
+    <view class="title">
+      <text>{{title}}</text>
+    </view>
+    <view class="content" style="{{content!='' ? 'display:block' : 'display:none'}}">
+      <text>{{content}}</text>
+    </view>
+    <view class="about-btn" style="{{aboutBtn!='' ? 'display:block' : 'display:none'}}">
+      <button wx:if="{{btnType=='copy'}}" bindtap="copyWords" hover-class="btn-hover" data-copy-content="{{copyContent}}">{{aboutBtn}}</button>
+      <button wx:else if="{{btnType=='nav'}}" bindtap="navOtherPro" hover-class="btn-hover" data-app-id="{{appId}}">{{aboutBtn}}</button>
+    </view>
+  </view>
+</template>

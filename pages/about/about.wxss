@@ -1,0 +1,50 @@
+.element-container{
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  /* background-color: yellow; */
+  padding: 10px 40rpx 8px 40rpx;
+  margin: 5px 0 0 0;
+  font-size: 21px;
+}
+
+.icon-class{
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 20rpx;
+}
+
+.line{
+  content: " ";
+  margin-top: 8px;
+  left: 40rpx;
+  right: 40rpx;
+  height: 1px;
+  border-top: 2px solid #d0d6ff;
+}
+
+.kefu-button {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  height: 106rpx;
+  width: 100%;
+  opacity: 0;
+}
+
+.arrow{
+  content: " ";
+  border-top: 1px #c0c8ff solid;
+  border-right: 1px #c0c8ff solid;
+  width: 8px;
+  height: 8px;
+  /* border-top-width: 6px;
+  border-right-width: 6px; */
+  /* background-color: white; */
+  transform: matrix(1,1,-1,1,0,0);
+  position: absolute;
+  right: 56rpx;
+  margin-top: 1px;
+}

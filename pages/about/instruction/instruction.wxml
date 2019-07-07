@@ -1,0 +1,19 @@
+<import src="content-part-template/content-part-template.wxml" />
+
+<view style="{{aboutType=='instruction' ? 'display:block;' : 'display:none;'}} padding-bottom: 5px;">
+  <block wx:for="{{instructionArr}}" wx:key="">
+    <template is="contentPart" data="{{...item}}"/>
+  </block>
+</view>
+
+<view style="{{aboutType=='link' ? 'display:block;' : 'display:none;'}} padding-bottom: 5px;">
+  <block wx:for="{{linkArr}}" wx:key="">
+    <template is="contentPart" data="{{...item}}"/>
+  </block>
+</view>
+
+<view style="{{aboutType=='otherPro' ? 'display:block;' : 'display:none;'}} padding-bottom: 5px;">
+  <block wx:for="{{otherProArr}}" wx:key="">
+    <template is="contentPart" data="{{...item}}"/>
+  </block>
+</view>

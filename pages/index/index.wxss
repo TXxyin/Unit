@@ -1,0 +1,63 @@
+@import "unit-part-template/unit-part-template.wxss";
+
+.page-container{
+  margin: 0px 40rpx 0px 40rpx;
+}
+
+.unit-container{
+  margin: 2px 0 0 0;
+}
+
+.title{
+  font-size: 21px;
+  margin: 10px 0 0 0;
+}
+
+.unit-part{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+}
+
+.unit-part::after{
+  content: " ";
+  position: absolute;
+  margin-top: 30px;
+  left: 40rpx;
+  right: 40rpx;
+  height: 1px;
+  border-top: 2px solid #d0d6ff;
+}
+
+.space{
+width: 30rpx;
+}
+
+.input-value-container{
+  margin: 5px 0 0px 0;
+  padding: 0 20rpx;
+  border: 2px solid #d0d6ff;
+  height: 40px;
+  line-height: 40px;
+  font-size: 23px;
+  color: #8992c8;
+}
+
+.reset-button{
+  margin: 10px 200rpx 0 200rpx;
+  font-size: 22px;
+  line-height: 46px;
+  background-color: #8992c8;
+  color: #ffffff;
+}
+
+.reset-button-hover{
+  background-color: #7c84b5;
+  color: #f4f4f4;
+}
+
+.warning{
+  color: red;
+}

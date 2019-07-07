@@ -1,0 +1,39 @@
+<!-- <common-icons> -->
+
+<import src="unit-part-template/unit-part-template.wxml" />
+
+<!-- <view class='statusBarBg' style='height:{{statusBarHeight}}px'></view> -->
+
+<view class="page-container">
+  <view class="title">您当前输入的是：</view>
+  <view class="title input-value-container {{isWarning == true ? 'warning' : ''}}">{{inputValue}}</view>
+
+  <view class='part-container'>
+    <!-- <view class='title'>食品/体重</view> -->
+    <view class='unit-container'>
+      <form bindreset="bindReset">
+        <view class='unit-part'>
+          <template is="unitPart" data="{{...unitArr[0]}}"/>
+        </view>
+        <view class='unit-part'>
+          <template is="unitPart" data="{{...unitArr[1]}}"/>
+        </view>
+        <view class='unit-part'>
+          <template is="unitPart" data="{{...unitArr[2]}}"/>
+          <view class='space'></view>
+          <template is="unitPart" data="{{...unitArr[3]}}"/>
+        </view>
+        <view class='unit-part'>
+          <template is="unitPart" data="{{...unitArr[4]}}"/>
+        </view>
+        <view class='unit-part'>
+          <template is="unitPart" data="{{...unitArr[5]}}"/>
+        </view>
+
+        <button form-type="reset" size='default' class="reset-button" hover-class="reset-button-hover" hover-stay-time="100">重置</button>
+      </form>
+    </view>
+  </view>
+</view>
+
+<!-- </common-icons> -->

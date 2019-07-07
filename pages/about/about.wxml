@@ -1,0 +1,15 @@
+<template name="element">
+  <view class='element-container' bindtap="{{tap == 'navigate' ? 'bindElement' : ''}}" data-about-type="{{aboutType}}" data-page-title='{{text}}'>
+    <button open-type="contact" show-message-card="true" class="kefu-button" style="{{tap == 'kefu' ? 'display: block' : 'display: none'}}" bindcontact="handleContact"></button>
+    <image src="{{iconPath}}" class="icon-class"></image>
+    <text>{{text}}</text>
+    <view class='arrow'></view>
+  </view>
+  <view class='line'></view>
+</template>
+
+<view class="page-container">
+  <block wx:for="{{elements}}" wx:key="">
+    <template is="element" data="{{...item}}"/>
+  </block>
+</view>

@@ -1,0 +1,6 @@
+<template name="unitPart">
+  <view class='unit-input-container'>
+    <input id='input{{id}}' class="unit-input {{isDisabled==true ? 'deep-background' : 'light-background'}}" type="digit" maxlength="15" disabled="{{isDisabled}}" placeholder="{{placeholderValue}}" placeholder-class="unit-input-placeholder" value="{{value}}" bindinput="bindKeyInput" data-id="{{id}}" />
+  </view>
+  <view class='unit-name'>{{name}}</view>
+</template>

@@ -1,0 +1,35 @@
+.unit-input-container{
+  width: 250rpx;
+  font-size: 24px;
+  text-align: right;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: 0 20rpx 0 0;
+  /* border: 1px solid red; */
+  /* background-color: #ffffff; */
+}
+
+.unit-input{
+  /* background-color: yellow; */
+  height: 40px;
+  padding: 0 4rpx;
+  /* color: #5c6286; */
+}
+
+.deep-background{
+  background-color: #fffee8;
+  /* background-color: #e9ecff; */
+}
+
+.light-background{
+  background-color: #f2f4ff;
+}
+
+.unit-input-placeholder{
+  color: #c0c8ff;
+}
+
+.unit-name{
+  font-size: 20px;
+}

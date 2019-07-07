@@ -1,0 +1,43 @@
+.content-part-container{
+  margin: 0 40rpx;
+}
+  
+.title{
+  margin: 5px 0 3px 0;
+}
+
+.title text{
+  font-size: 40rpx;
+  line-height: 50px;
+  border-bottom: 2px solid #c0c8ff;
+  padding: 0px 20rpx 3px 0;
+  font-weight: bold;
+  color: #c0c8ff;
+  text-shadow: 3rpx 3rpx 0rpx #7c84b5;
+  letter-spacing: 4rpx;
+}
+
+.content{
+  margin-bottom: 20px;
+}
+
+.content text{
+  font-size: 34rpx;
+}
+
+.about-btn{
+  margin: 10px 30rpx 20px 30rpx;
+}
+
+.about-btn button{
+  padding: 0 10rpx;
+  font-size: 34rpx;
+  line-height: 42px;
+  background-color: #8992c8;
+  color: #ffffff;
+}
+
+.about-btn .btn-hover{
+  background-color: #7c84b5;
+  color: #f4f4f4;
+}
