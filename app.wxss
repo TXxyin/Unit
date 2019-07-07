@@ -1,0 +1,11 @@
+page{
+  /* background-color: #ededed; */
+  color: #8992c8;
+}
+
+.statusBarBg {
+  background-color: #8992c8;
+  position: fixed;
+  width: 750rpx;
+  top: 0;
+}

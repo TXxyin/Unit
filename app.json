@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/about/about",
+    "pages/about/instruction/instruction"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#8992c8",
+    "navigationBarTitleText": "家常单位换算转换",
+    "navigationBarTextStyle": "white",
+    "backgroundColorTop": "#ffffff",
+    "backgroundColorBottom": "#ffffff",
+    "navigationStyle": "default"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#d0d0d0",
+    "selectedColor": "#8992c8",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "换算",
+        "iconPath": "/icons/icon_conversion.png",
+        "selectedIconPath": "/icons/icon_conversion_selected.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "关于",
+        "iconPath": "/icons/icon_about.png",
+        "selectedIconPath": "/icons/icon_about_selected.png"
+      }
+    ]
+  },
+  "resizable": true,
+  "navigateToMiniProgramAppIdList": [
+    "wx9b74a5957a52a7f4",
+    "wx10d9d1765d1ea386",
+    "wxec8dbdaeca260cac",
+    "wxdcec05d9a27f9064"
+  ]
+}
