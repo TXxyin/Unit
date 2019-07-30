@@ -1,6 +1,8 @@
 page{
   /* background-color: #ededed; */
   color: #8992c8;
+  margin: 0;
+  padding: 0;
 }
 
 .statusBarBg {
@@ -9,3 +11,7 @@ page{
   width: 750rpx;
   top: 0;
 }
+
+/* swiper{
+  height: 445px;
+} */
