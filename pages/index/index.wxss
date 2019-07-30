@@ -1,11 +1,49 @@
 @import "unit-part-template/unit-part-template.wxss";
 
+.swiper-tab-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px #d0d6ff solid;
+  background-color: #f2f4ff;
+}
+
+.swiper-tab-inner{
+  width: 230rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-tab{
+  font-size: 18px;
+  width: fit-content;
+  height: 36px;
+  line-height: 36px;
+  padding: 0px 20rpx 0px 20rpx;
+}
+
+.swiper-tab-on{
+  font-size: 19px;
+  border-bottom: 3px solid #c0c8ff;
+  font-weight: bold;
+  color: #c0c8ff;
+  text-shadow: 3rpx 3rpx 0rpx #7c84b5;
+  letter-spacing: 4rpx;
+}
+
 .page-container{
   margin: 0px 40rpx 0px 40rpx;
 }
 
+.part-container{
+  margin: 0px 0rpx 0px 0rpx;
+}
+
 .unit-container{
-  margin: 2px 0 0 0;
+  margin: 0px 0 10px 0;
 }
 
 .title{
@@ -25,8 +63,8 @@
   content: " ";
   position: absolute;
   margin-top: 30px;
-  left: 40rpx;
-  right: 40rpx;
+  left: 0rpx;
+  right: 0rpx;
   height: 1px;
   border-top: 2px solid #d0d6ff;
 }
@@ -36,8 +74,8 @@ width: 30rpx;
 }
 
 .input-value-container{
-  margin: 5px 0 0px 0;
-  padding: 0 20rpx;
+  margin: 5px 0 2px 0;
+  padding: 0 20rpx 0px 20rpx;
   border: 2px solid #d0d6ff;
   height: 40px;
   line-height: 40px;

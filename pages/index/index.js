@@ -1,58 +1,48 @@
+const app = getApp();
+var unitArr = require('../../data/unitArr.js');
+var calc = require('../../utils/calc/calc.js');
+
 Page({
   data: {
-    inputValue: "您没有输入内容",
-    unitArr: [
-      {
-        id: 0,
-        name: "克(g)",
-        placeholderValue: 0,
-        value: "",
-        isDisabled: false
-      },
-      {
-        id: 1,
-        name: "千克 公斤(kg)",
-        placeholderValue: 0,
-        value: "",
-        isDisabled: false
-      },
-      {
-        id: 2,
-        name: "斤",
-        placeholderValue: 0,
-        value: "",
-        isDisabled: false
-      },
-      {
-        id: 3,
-        name: "两",
-        placeholderValue: 0,
-        value: "",
-        isDisabled: false
-      },
-      {
-        id: 4,
-        name: "元/斤",
-        placeholderValue: 0,
-        value: "",
-        isDisabled: false
-      },
-      {
-        id: 5,
-        name: "元",
-        placeholderValue: 0,
-        value: "",
-        isDisabled: false
-      },
-    ]
+    windowHeight: app.globalData.windowHeight,
+    swiperHeight: app.globalData.windowHeight - 51,
+    scrollHeight: app.globalData.windowHeight - 140,
+    currentTab: 0,
+    inputValue0: "您没有输入内容",
+    inputValue1: "您没有输入内容",
   },
   
   onLoad: function () {
-    
+    this.setData({
+      unitArr: unitArr.unitArr,
+    })
+    // wx.openBluetoothAdapter({
+    //   success(res) {
+    //     console.log(res.errMsg)
+
+    //   },
+    //   fail(res){
+    //     console.log(res.errMsg)
+    //   }
+    // })
   },
 
   onShareAppMessage: function () {
 
+  },
+
+  switchNav: function (e) {
+    var current = e.currentTarget.dataset.current;
+    this.setData({
+      currentTab: current,
+    })
+  },
+
+  changeSwiper: function (e) {
+    var current = e.detail.current;
+    this.setData({
+      currentTab: current,
+    })
   },
 
   bindKeyInput: function (e) {
@@ -61,293 +51,113 @@ Page({
     var id = e.target.dataset.id
 
     if (value == ""){
-      this.setData({
-        inputValue: "您没有输入内容"
-      })
+      if (this.data.currentTab == 0) {
+        this.setData({
+          inputValue0: "您没有输入内容"
+        })
+      }
+      else if (this.data.currentTab == 1) {
+        this.setData({
+          inputValue1: "您没有输入内容"
+        })
+      }
     }else if (value == ".") {
-      this.setData({
-        inputValue: 0
-      })
+      if (this.data.currentTab == 0) {
+        this.setData({
+          inputValue0: 0
+        })
+      }
+      else if (this.data.currentTab == 1) {
+        this.setData({
+          inputValue1: 0
+        })
+      }
     } else {
-      this.setData({
-        inputValue: parseFloat(value)
-      })
+      if (this.data.currentTab == 0){
+        this.setData({
+          inputValue0: parseFloat(value)
+        })
+      }
+      else if (this.data.currentTab == 1){
+        this.setData({
+          inputValue1: parseFloat(value)
+        })
+      }
     }
 
     switch (id) {
+      // 称量-克
       case 0:
-        // if ((value / 5 - parseInt(value / 50) * 10) >= 5) {
-        //   var isJinWei = 1;
-        // } else {
-        //   var isJinWei = 0;
-        // }
-
-        this.setData({
-          'unitArr[0].value': value,
-          'unitArr[1].value': parseFloat((value / 1000).toFixed(5)),
-          'unitArr[1].isDisabled': true,
-          'unitArr[2].value': parseInt((value / 500).toFixed(2)),
-          'unitArr[2].isDisabled': true,
-          'unitArr[3].value': parseFloat(((value / 50) - parseInt((value / 500).toFixed(2)) * 10).toFixed(0)),
-          'unitArr[3].isDisabled': true,
-        })
-        if (value == "") {
-          this.setData({
-            'unitArr[1].value': "",
-            'unitArr[1].isDisabled': false,
-            'unitArr[2].value': "",
-            'unitArr[2].isDisabled': false,
-            'unitArr[3].value': "",
-            'unitArr[3].isDisabled': false,
-          })
-        }
-        if (this.data.unitArr[4].value != "" && (this.data.unitArr[5].value == "" || this.data.unitArr[5].isDisabled == true)){
-          this.setData({
-            'unitArr[5].value': parseFloat((this.data.unitArr[1].value * 2 * this.data.unitArr[4].value).toFixed(2)),
-            'unitArr[5].isDisabled': true
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[5].value': "",
-              'unitArr[5].isDisabled': false,
-            })
-          }
-        } else if (this.data.unitArr[5].value != "" && (this.data.unitArr[4].value == "" || this.data.unitArr[4].isDisabled == true)) {
-          this.setData({
-            'unitArr[4].value': parseFloat((this.data.unitArr[5].value / (this.data.unitArr[1].value * 2)).toFixed(2)),
-            'unitArr[4].isDisabled': true
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[4].value': "",
-              'unitArr[4].isDisabled': false,
-            })
-          }
-        }
+        calc.case0(this, value);
         break;
+
+      // 称量-千克
       case 1:
-        // if ((value * 200 - parseInt(value * 20) * 10) >= 5) {
-        //   var isJinWei = 1;
-        // } else {
-        //   var isJinWei = 0;
-        // }
-
-        this.setData({
-          'unitArr[1].value': value,
-          'unitArr[0].value': parseFloat((value * 1000).toFixed(2)),
-          'unitArr[0].isDisabled': true,
-          'unitArr[2].value': parseInt((value * 2).toFixed(2)),
-          'unitArr[2].isDisabled': true,
-          'unitArr[3].value': parseFloat(((value * 20) - parseInt((value * 2).toFixed(2)) * 10).toFixed(0)),
-          'unitArr[3].isDisabled': true,
-        })
-        if (value == "") {
-          this.setData({
-            'unitArr[0].value': "",
-            'unitArr[0].isDisabled': false,
-            'unitArr[2].value': "",
-            'unitArr[2].isDisabled': false,
-            'unitArr[3].value': "",
-            'unitArr[3].isDisabled': false,
-          })
-        }
-        if (this.data.unitArr[4].value != "" && (this.data.unitArr[5].value == "" || this.data.unitArr[5].isDisabled == true)) {
-          this.setData({
-            'unitArr[5].value': parseFloat((this.data.unitArr[1].value * 2 * this.data.unitArr[4].value).toFixed(2)),
-            'unitArr[5].isDisabled': true
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[5].value': "",
-              'unitArr[5].isDisabled': false,
-            })
-          }
-        } else if (this.data.unitArr[5].value != "" && (this.data.unitArr[4].value == "" || this.data.unitArr[4].isDisabled == true)) {
-          this.setData({
-            'unitArr[4].value': parseFloat((this.data.unitArr[5].value / (this.data.unitArr[1].value * 2)).toFixed(2)),
-            'unitArr[4].isDisabled': true
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[4].value': "",
-              'unitArr[4].isDisabled': false,
-            })
-          }
-        }
+        calc.case1(this, value);
         break;
+
+      // 称量-斤
       case 2:
-        this.setData({
-          'unitArr[2].value': value,
-          'unitArr[0].value': parseFloat((value * 500 + this.data.unitArr[3].value * 50).toFixed(2)),
-          'unitArr[0].isDisabled': true,
-          'unitArr[1].value': parseFloat((value / 2 + this.data.unitArr[3].value / 20).toFixed(5)),
-          'unitArr[1].isDisabled': true,
-        })
-        if (value == "" && this.data.unitArr[3].value == "") {
-          this.setData({
-            'unitArr[0].value': "",
-            'unitArr[0].isDisabled': false,
-            'unitArr[1].value': "",
-            'unitArr[1].isDisabled': false,
-          })
-        }
-        if (this.data.unitArr[4].value != "" && (this.data.unitArr[5].value == "" || this.data.unitArr[5].isDisabled == true)) {
-          this.setData({
-            'unitArr[5].value': parseFloat((this.data.unitArr[1].value * 2 * this.data.unitArr[4].value).toFixed(2)),
-            'unitArr[5].isDisabled': true
-          })
-          if (value == "" && this.data.unitArr[3].value == "") {
-            this.setData({
-              'unitArr[5].value': "",
-              'unitArr[5].isDisabled': false,
-            })
-          }
-        } else if (this.data.unitArr[5].value != "" && (this.data.unitArr[4].value == "" || this.data.unitArr[4].isDisabled == true)) {
-          this.setData({
-            'unitArr[4].value': parseFloat((this.data.unitArr[5].value / (this.data.unitArr[1].value * 2)).toFixed(2)),
-            'unitArr[4].isDisabled': true
-          })
-          if (value == "" && this.data.unitArr[3].value == "") {
-            this.setData({
-              'unitArr[4].value': "",
-              'unitArr[4].isDisabled': false,
-            })
-          }
-        }
+        calc.case2(this, value);
         break;
+
+      // 称量-两
       case 3:
-        this.setData({
-          'unitArr[3].value': value,
-          'unitArr[0].value': parseFloat((value * 50 + this.data.unitArr[2].value * 500).toFixed(2)),
-          'unitArr[0].isDisabled': true,
-          'unitArr[1].value': parseFloat((value / 20 + this.data.unitArr[2].value / 2).toFixed(5)),
-          'unitArr[1].isDisabled': true,
-        })
-        if (value == "" && this.data.unitArr[2].value == "") {
-          this.setData({
-            'unitArr[0].value': "",
-            'unitArr[0].isDisabled': false,
-            'unitArr[1].value': "",
-            'unitArr[1].isDisabled': false,
-          })
-        }
-        if (this.data.unitArr[4].value != "" && (this.data.unitArr[5].value == "" || this.data.unitArr[5].isDisabled == true)) {
-          this.setData({
-            'unitArr[5].value': parseFloat((this.data.unitArr[1].value * 2 * this.data.unitArr[4].value).toFixed(2)),
-            'unitArr[5].isDisabled': true
-          })
-          if (value == "" && this.data.unitArr[2].value == "") {
-            this.setData({
-              'unitArr[5].value': "",
-              'unitArr[5].isDisabled': false,
-            })
-          }
-        } else if (this.data.unitArr[5].value != "" && (this.data.unitArr[4].value == "" || this.data.unitArr[4].isDisabled == true)) {
-          this.setData({
-            'unitArr[4].value': parseFloat((this.data.unitArr[5].value / (this.data.unitArr[1].value * 2)).toFixed(2)),
-            'unitArr[4].isDisabled': true
-          })
-          if (value == "" && this.data.unitArr[2].value == "") {
-            this.setData({
-              'unitArr[4].value': "",
-              'unitArr[4].isDisabled': false,
-            })
-          }
-        }
+        calc.case3(this, value);
         break;
+
+      // 称量-元/斤
       case 4:
-        this.setData({
-          'unitArr[4].value': value,
-        })
-        if (this.data.unitArr[1].value != "" && (this.data.unitArr[5].value == "" || this.data.unitArr[5].isDisabled == true)) {
-          this.setData({
-            'unitArr[5].value': parseFloat((this.data.unitArr[1].value * 2 * (this.data.unitArr[4].value)).toFixed(2)),
-            'unitArr[5].isDisabled': true
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[5].value': "",
-              'unitArr[5].isDisabled': false,
-            })
-          }
-        } else if (this.data.unitArr[5].value != "" && (this.data.unitArr[1].value == "" || this.data.unitArr[0].isDisabled == true || this.data.unitArr[1].isDisabled == true || this.data.unitArr[2].isDisabled == true)) {
-          // if ((this.data.unitArr[5].value / this.data.unitArr[4].value * 100 - parseInt(this.data.unitArr[5].value / this.data.unitArr[4].value * 10) * 10) >= 5) {
-          //   var isJinWei = 1;
-          // } else {
-          //   var isJinWei = 0;
-          // }
-
-          this.setData({
-            'unitArr[1].value': parseFloat((this.data.unitArr[5].value / this.data.unitArr[4].value / 2).toFixed(5)),
-            'unitArr[1].isDisabled': true,
-            'unitArr[0].value': parseFloat((this.data.unitArr[5].value / this.data.unitArr[4].value * 500).toFixed(2)),
-            'unitArr[0].isDisabled': true,
-            'unitArr[2].value': parseInt((this.data.unitArr[5].value / this.data.unitArr[4].value).toFixed(2)),
-            'unitArr[2].isDisabled': true,
-            'unitArr[3].value': parseFloat(((this.data.unitArr[5].value / this.data.unitArr[4].value * 10) - parseInt((this.data.unitArr[5].value / this.data.unitArr[4].value).toFixed(2)) * 10).toFixed(0)),
-            'unitArr[3].isDisabled': true,
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[0].value': "",
-              'unitArr[0].isDisabled': false,
-              'unitArr[1].value': "",
-              'unitArr[1].isDisabled': false,
-              'unitArr[2].value': "",
-              'unitArr[2].isDisabled': false,
-              'unitArr[3].value': "",
-              'unitArr[3].isDisabled': false,
-            })
-          }
-        }
+        calc.case4(this, value);
         break;
-      case 5:
-        this.setData({
-          'unitArr[5].value': value,
-        })
-        if (this.data.unitArr[1].value != "" && (this.data.unitArr[4].value == "") || (this.data.unitArr[4].isDisabled == true)) {
-          this.setData({
-            'unitArr[4].value': parseFloat((this.data.unitArr[5].value / (this.data.unitArr[1].value * 2)).toFixed(2)),
-            'unitArr[4].isDisabled': true
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[4].value': "",
-              'unitArr[4].isDisabled': false,
-            })
-          }
-        } else if (this.data.unitArr[4].value != "" && (this.data.unitArr[1].value == "" || this.data.unitArr[0].isDisabled == true || this.data.unitArr[1].isDisabled == true || this.data.unitArr[2].isDisabled == true)) {
-          // if ((this.data.unitArr[5].value / this.data.unitArr[4].value * 100 - parseInt(this.data.unitArr[5].value / this.data.unitArr[4].value * 10) * 10) >= 5) {
-          //   var isJinWei = 1;
-          // } else {
-          //   var isJinWei = 0;
-          // }
 
-          this.setData({
-            'unitArr[1].value': parseFloat((this.data.unitArr[5].value / this.data.unitArr[4].value / 2).toFixed(5)),
-            'unitArr[1].isDisabled': true,
-            'unitArr[0].value': parseFloat((this.data.unitArr[5].value / this.data.unitArr[4].value * 500).toFixed(2)),
-            'unitArr[0].isDisabled': true,
-            'unitArr[2].value': parseInt((this.data.unitArr[5].value / this.data.unitArr[4].value).toFixed(2)),
-            'unitArr[2].isDisabled': true,
-            'unitArr[3].value': parseFloat(((this.data.unitArr[5].value / this.data.unitArr[4].value * 10) - parseInt((this.data.unitArr[5].value / this.data.unitArr[4].value).toFixed(2)) * 10).toFixed(0)),
-            'unitArr[3].isDisabled': true,
-          })
-          if (value == "") {
-            this.setData({
-              'unitArr[0].value': "",
-              'unitArr[0].isDisabled': false,
-              'unitArr[1].value': "",
-              'unitArr[1].isDisabled': false,
-              'unitArr[2].value': "",
-              'unitArr[2].isDisabled': false,
-              'unitArr[3].value': "",
-              'unitArr[3].isDisabled': false,
-            })
-          }
-        }
+      // 称量-元
+      case 5:
+        calc.case5(this, value);
+        break;
+      
+      // 车主专区-元（充值/花费）
+      case 6:
+        calc.case6(this, value);
+        break;
+
+      // 车主专区-元/升（油价）
+      case 7:
+        calc.case7(this, value);
+        break;
+
+      // 车主专区-升（油量/油耗）
+      case 8:
+        calc.case8(this, value);
+        break;
+
+      // 车主专区-升（百公里油耗）
+      case 9:
+        calc.case9(this, value);
+        break;
+
+      // 车主专区-公里（行驶里程）
+      case 10:
+        calc.case10(this, value);
+        break;
+
+      // 车主专区-公里（日均行驶）
+      case 11:
+        calc.case11(this, value);
+        break;
+
+      // 车主专区-天（行驶天数）
+      case 12:
+        calc.case12(this, value);
+        break;
+
+      // 车主专区-升（日均油耗）
+      case 13:
+        calc.case13(this, value);
         break;
     }
+
+    // calc.caseAll(this, value);
 
     // split()  分隔函数。以“.”为分隔符，将value字符串分成n份，count也就是n-1即为“.”出现的次数
     var count = value.split('.').length - 1;
@@ -355,14 +165,29 @@ Page({
     if (count >= 2) {
       // value = ""
       // pos = value.length
-      this.setData({
-        inputValue: "输入有误，请重新输入",
-        isWarning: true
-      })
+      if(this.data.currentTab == 0){
+        this.setData({
+          inputValue0: "输入有误，请重新输入",
+          isWarning0: true
+        })
+      }
+      else if (this.data.currentTab == 1) {
+        this.setData({
+          inputValue1: "输入有误，请重新输入",
+          isWarning1: true
+        })
+      }
     }else{
-      this.setData({
-        isWarning: false
-      })
+      if (this.data.currentTab == 0) {
+        this.setData({
+          isWarning0: false
+        })
+      }
+      else if (this.data.currentTab == 1) {
+        this.setData({
+          isWarning1: false
+        })
+      }
     }
 
     return {
@@ -371,21 +196,65 @@ Page({
     }
   },
 
-  bindReset: function () {
-    this.setData({
-      'unitArr[0].value': "",
-      'unitArr[0].isDisabled': false,
-      'unitArr[1].value': "",
-      'unitArr[1].isDisabled': false,
-      'unitArr[2].value': "",
-      'unitArr[2].isDisabled': false,
-      'unitArr[3].value': "",
-      'unitArr[3].isDisabled': false,
-      'unitArr[4].value': "",
-      'unitArr[4].isDisabled': false,
-      'unitArr[5].value': "",
-      'unitArr[5].isDisabled': false,
-      inputValue: "您没有输入内容"
-    })
-  }
+  bindReset: function (e) {
+    var formId = e.detail.formId;
+    // wx.request({
+    //   method: "POST",
+    //   url: 'http://www.txxystudio.cn/',
+    //   data: {
+    //     formId: formId,
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     console.log(res.data)
+    //   }
+    // })
+
+    if (this.data.currentTab == 0) {
+      this.setData({
+        'unitArr[0].value': "",
+        'unitArr[0].isDisabled': false,
+        'unitArr[1].value': "",
+        'unitArr[1].isDisabled': false,
+        'unitArr[2].value': "",
+        'unitArr[2].isDisabled': false,
+        'unitArr[3].value': "",
+        'unitArr[3].isDisabled': false,
+        'unitArr[4].value': "",
+        'unitArr[4].isDisabled': false,
+        'unitArr[5].value': "",
+        'unitArr[5].isDisabled': false,
+        inputValue0: "您没有输入内容",
+        isWarning0: false,
+      })
+    }
+    else if (this.data.currentTab == 1) {
+      this.setData({
+        'unitArr[6].value': "",
+        'unitArr[6].isDisabled': false,
+        'unitArr[7].value': "",
+        'unitArr[7].isDisabled': false,
+        'unitArr[8].value': "",
+        'unitArr[8].isDisabled': false,
+        'unitArr[9].value': "",
+        'unitArr[9].isDisabled': false,
+        'unitArr[10].value': "",
+        'unitArr[10].isDisabled': false,
+        'unitArr[11].value': "",
+        'unitArr[11].isDisabled': false,
+        'unitArr[12].value': "",
+        'unitArr[12].isDisabled': false,
+        'unitArr[13].value': "",
+        'unitArr[13].isDisabled': false,
+        inputValue1: "您没有输入内容",
+        isWarning1: false,
+      })
+    }
+  },
+
+  // bindsubmit: function (e) {
+  //   console.log(e)
+  // }
 })

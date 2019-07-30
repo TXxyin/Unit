@@ -4,36 +4,73 @@
 
 <!-- <view class='statusBarBg' style='height:{{statusBarHeight}}px'></view> -->
 
-<view class="page-container">
-  <view class="title">您当前输入的是：</view>
-  <view class="title input-value-container {{isWarning == true ? 'warning' : ''}}">{{inputValue}}</view>
-
-  <view class='part-container'>
-    <!-- <view class='title'>食品/体重</view> -->
-    <view class='unit-container'>
-      <form bindreset="bindReset">
-        <view class='unit-part'>
-          <template is="unitPart" data="{{...unitArr[0]}}"/>
-        </view>
-        <view class='unit-part'>
-          <template is="unitPart" data="{{...unitArr[1]}}"/>
-        </view>
-        <view class='unit-part'>
-          <template is="unitPart" data="{{...unitArr[2]}}"/>
-          <view class='space'></view>
-          <template is="unitPart" data="{{...unitArr[3]}}"/>
-        </view>
-        <view class='unit-part'>
-          <template is="unitPart" data="{{...unitArr[4]}}"/>
-        </view>
-        <view class='unit-part'>
-          <template is="unitPart" data="{{...unitArr[5]}}"/>
-        </view>
-
-        <button form-type="reset" size='default' class="reset-button" hover-class="reset-button-hover" hover-stay-time="100">重置</button>
-      </form>
-    </view>
+<view class="swiper-tab-container">
+  <view class='swiper-tab-inner'>
+    <view class="swiper-tab {{currentTab==0 ? 'swiper-tab-on' : ''}}" data-current="0" bindtap="switchNav">称量</view>
+  </view>
+  <view class='swiper-tab-inner'>
+    <view class="swiper-tab {{currentTab==1 ? 'swiper-tab-on' : ''}}" data-current="1" bindtap="switchNav">车主专区</view>
   </view>
 </view>
+
+<swiper current='{{currentTab}}' bindchange="changeSwiper" easing-function="easeOutCubic" style="height:{{swiperHeight}}px">
+  <swiper-item item-id="0">
+    <view class="page-container">
+      <view class="title">您当前输入的是：</view>
+      <view class="title input-value-container {{isWarning0 == true ? 'warning' : ''}}">{{inputValue0}}</view>
+
+      <view class='part-container'>
+        <scroll-view scroll-y style="height:{{scrollHeight}}px">
+          <view class='unit-container'>
+            <form bindsubmit="bindReset" report-submit>
+              <view class='unit-part'>
+                <template is="unitPart" data="{{...unitArr[0]}}"/>
+              </view>
+              <view class='unit-part'>
+                <template is="unitPart" data="{{...unitArr[1]}}"/>
+              </view>
+              <view class='unit-part'>
+                <template is="unitPart" data="{{...unitArr[2]}}"/>
+                <view class='space'></view>
+                <template is="unitPart" data="{{...unitArr[3]}}"/>
+              </view>
+              <view class='unit-part'>
+                <template is="unitPart" data="{{...unitArr[4]}}"/>
+              </view>
+              <view class='unit-part'>
+                <template is="unitPart" data="{{...unitArr[5]}}"/>
+              </view>
+
+              <button form-type="submit" size='default' class="reset-button" hover-class="reset-button-hover" hover-stay-time="100">重置</button>
+            </form>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </swiper-item>
+
+  <swiper-item item-id="1">
+    <view class="page-container">
+      <view class="title">您当前输入的是：</view>
+      <view class="title input-value-container {{isWarning1 == true ? 'warning' : ''}}">{{inputValue1}}</view>
+
+      <view class='part-container'>
+        <scroll-view scroll-y style="height:{{scrollHeight}}px">
+          <view class='unit-container'>
+            <form bindsubmit="bindReset" report-submit>
+              <block wx:for="{{unitArr}}" wx:key="" wx:if="{{index>=6}}">
+                <view class='unit-part'>
+                  <template is="unitPart" data="{{...item}}"/>
+                </view>
+              </block>
+
+              <button form-type="submit" size='default' class="reset-button" hover-class="reset-button-hover" hover-stay-time="100">重置</button>
+            </form>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
 
 <!-- </common-icons> -->
